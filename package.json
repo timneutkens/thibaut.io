@@ -8,6 +8,7 @@
     "@emotion/core": "10.0.14",
     "@mdx-js/loader": "1.0.21",
     "@mdx-js/react": "1.0.21",
+    "@next/bundle-analyzer": "^9.0.3",
     "@next/mdx": "8.1.0",
     "emotion-theming": "10.0.14",
     "next": "9.0.0",
