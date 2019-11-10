@@ -1,0 +1,48 @@
+export const meta = {
+  title: 'Making your own Canvas hook 🖌',
+  description: 'Canvas & React being best friends',
+  date: 'October 18, 2019',
+};
+
+The `canvas` element is like a sheet of paper. To draw on a real sheet of paper, you take a pen, you then move your hand to a certain position, a finaly draw a line by moving your hand to another position. The browser API to draw on a canvas is actually very similar:
+
+```js
+canvasContext.fillStyle = 'green'; // taking a green pen
+canvasContext.moveTo(x1, y1); // moving your hand to the stating position
+canvasContext.lineTo(x2, y2); // drawing a line to the finishing position
+```
+
+Having imperative code like this in a component oriented codebase can be tricky, so let's see how to reconcile React and Canvas by building our own hook !
+
+## Hexagons
+
+We first need to find something to draw on our canvas. So let's try to recreate a pattern I saw on the walls of some meeting rooms that I really liked: big random colorful hexagons overlapping.
+
+Picture
+
+To draw this, the first thing we'll need is a function that randomly generate some hexagons. We can define an hexagon with the folowing information:
+
+- a position on the screen, defined by two `x` and `y` number values
+- a `radius` that will define its size
+- a `rotation` so that all hexagons don't look aligned
+- and finally, a `color`
+
+Now that we have that covered, let's jump into drawing on a canvas !
+
+## Drawing a simple line
+
+Let's create a component that renders a `<canvas />` on the page. Then, we need to call the `moveTo` and `lineTo` methods on it to draw a line. In practice, it's a bit more complicated to bridge those two: we will need to use a React reference to access the canvas DOM node. We then need to get a 2D context out of it, and then finally we can call our drawing methods. The code looks like that:
+
+```jsx
+const Canvas = () => {
+  const canvasRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const context = canvasRef.current.getContext('2d');
+    context.moveTo();
+    context.lineTo();
+  }, [canvasRef]);
+
+  return <canvas ref={canvasRef} />;
+};
+```
