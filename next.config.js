@@ -6,7 +6,7 @@ module.exports = withMDX({
     return {
       '/': { page: '/' },
       '/duple': { page: '/duple' },
-      '/refs': { page: '/refs' },
+      '/react-refs-evolution': { page: '/react-refs-evolution' },
       '/hexagons': { page: '/hexagons' },
     };
   },
